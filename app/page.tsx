@@ -1,7 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+
+function Image({
+  priority,
+  sizes,
+  ...props
+}: React.ImgHTMLAttributes<HTMLImageElement> & {
+  priority?: boolean;
+  sizes?: string;
+}) {
+  void priority;
+  void sizes;
+  return <img {...props} alt={props.alt ?? ""} />;
+}
 
 const PHONE = "5511975669706";
 const MESSAGE = "Olá, Rafael! Vi seu site e gostaria de conversar sobre um projeto.";

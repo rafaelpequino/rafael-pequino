@@ -13,11 +13,6 @@
 # testes
 /coverage
 
-# next.js
-/.next/
-/.vinext/
-/out/
-
 # misc
 .DS_Store
 *.pem
@@ -31,10 +26,4 @@ yarn-error.log*
 # env
 .env*
 
-# vercel
-.vercel
-
 /dist/
-/.wrangler/
-/outputs/
-/work/
