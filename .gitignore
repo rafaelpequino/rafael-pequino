@@ -1,6 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# dependencias
 /node_modules
 /.npm-cache/
 /.pnpm-store/
@@ -12,7 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testes
 /coverage
 
 # next.js
@@ -30,7 +28,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env
 .env*
 
 # vercel

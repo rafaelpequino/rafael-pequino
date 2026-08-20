@@ -1,8 +1,46 @@
-# vinext-starter
+# Rafael Pequino — Site
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Landing page pessoal de Rafael Pequino (desenvolvedor freelancer), apresentando
+serviços, portfólio e contato via WhatsApp. É uma página única (`/`), renderizada
+com React/Next.js (App Router) e hospedada em um Cloudflare Worker através do
+[vinext](https://github.com/cloudflare/vinext).
+
+## Por que tantas pastas para "uma página só"?
+
+O projeto tinha nascido de um template de starter full-stack (`vinext-starter`),
+que trazia pronto um esqueleto de banco de dados (Drizzle + Cloudflare D1),
+uma pasta de exemplos e um teste automatizado — tudo isso nunca chegou a ser
+usado pelo site real, que é 100% estático e sem banco de dados. Essa parte foi
+removida para deixar o projeto refletindo o que ele de fato é hoje: uma página
+única. Se no futuro o site precisar de um backend (formulário salvo em banco,
+área logada etc.), essas peças podem ser reintroduzidas sob demanda.
+
+Removido nesta limpeza: `db/`, `drizzle/`, `drizzle.config.ts` (schema vazio,
+nunca configurado), `examples/d1/` (exemplo opcional não referenciado) e
+`tests/` (testava a tela de loading do template, que não existe mais).
+
+## Estrutura de pastas
+
+```
+app/              Código da página (App Router do Next.js)
+  layout.tsx        Layout raiz: <html>/<body>, metadata de SEO, fonte
+  page.tsx          Conteúdo da landing page (única rota do site)
+  globals.css       Estilos globais/Tailwind da página
+  chatgpt-auth.ts   Helpers opcionais de login "Sign in with ChatGPT"
+  robots.ts         robots.txt gerado dinamicamente
+  sitemap.ts        sitemap.xml gerado dinamicamente
+public/           Assets estáticos servidos diretamente (imagens, ícones)
+worker/           Ponto de entrada do Cloudflare Worker (runtime de produção)
+.openai/          Configuração de hosting da plataforma (bindings opcionais)
+```
+
+Cada pasta tem uma única responsabilidade: `app/` é sobre conteúdo e SEO da
+página; `public/` são arquivos estáticos; `worker/` é a camada de
+infraestrutura (como o Worker do Cloudflare recebe e responde requisições);
+`.openai/` é configuração da plataforma de hosting. Os arquivos de config na
+raiz (`next.config.ts`, `vite.config.ts`, `tsconfig.json`, `eslint.config.mjs`,
+`postcss.config.mjs`) ficam soltos por serem convenção das próprias
+ferramentas (Next.js, Vite, TypeScript, ESLint, Tailwind/PostCSS).
 
 ## Prerequisites
 
@@ -16,16 +54,7 @@ npm run dev
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
-
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+Este starter não usa `wrangler.jsonc`.
 
 ## Workspace Auth Headers
 
@@ -90,11 +119,10 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 ## Useful Commands
 
 - `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+- `npm run build`: build the site for production
+- `npm run start`: run the production build locally
+- `npm run lint`: lint the codebase with ESLint
 
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
