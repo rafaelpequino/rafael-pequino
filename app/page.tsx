@@ -227,7 +227,7 @@ export default function Home() {
             </div>
             <div className="proof">
               <div>
-                <strong>+5</strong>
+                <strong>+4</strong>
                 <span>anos de experiência</span>
               </div>
               <div>
