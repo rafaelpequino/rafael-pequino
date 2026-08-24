@@ -1,131 +1,48 @@
-"use client";
-
 import { useEffect, useState } from "react";
-
-function Image({
-  priority,
-  sizes,
-  ...props
-}: React.ImgHTMLAttributes<HTMLImageElement> & {
-  priority?: boolean;
-  sizes?: string;
-}) {
-  void priority;
-  void sizes;
-  return <img {...props} alt={props.alt ?? ""} />;
-}
 
 const PHONE = "5511975669706";
 const MESSAGE = "Olá, Rafael! Vi seu site e gostaria de conversar sobre um projeto.";
 const WHATSAPP = `https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`;
-
-const services = [
-  { icon: "▱", title: "Sites institucionais", headline: "Apresente sua empresa de forma profissional." },
-  { icon: "↗", title: "Landing Pages", headline: "Transforme visitantes em oportunidades." },
-  { icon: "⌘", title: "Sistemas personalizados", headline: "Quando uma ferramenta pronta não resolve." },
-  { icon: "↻", title: "Automações", headline: "Menos tarefas repetitivas. Mais tempo para o que importa." },
-];
-
+const services = [["01", "Sites institucionais", "Uma presença digital à altura da sua empresa."], ["02", "Landing pages", "Páginas criadas para transformar visitas em leads."], ["03", "Sistemas", "Sistemas desenvolvidos em torno do seu processo."], ["04", "Automações", "Menos trabalho repetitivo. Mais tempo para o que importa."]];
 const projects = [
-  { index: "01", client: "ONE ODONTOLOGIA MOEMA", title: "Presença digital para uma clínica odontológica", text: "A clínica precisava de uma página própria para apresentar seus serviços e fortalecer sua presença no ambiente digital. Foi desenvolvida uma solução personalizada, clara e preparada para facilitar o contato de potenciais pacientes.", stat: "+500", statLabel: "visitas desde a publicação", url: "https://invisalignemmoema.com.br/", tone: "blue", screenshot: "/project-one-odontologia.png" },
-  { index: "02", client: "SNEETS AUDIOVISUAL", title: "Uma vitrine digital para uma produtora audiovisual", text: "A Sneets precisava apresentar seu trabalho de forma tão marcante quanto suas produções. O site organiza serviços, projetos e identidade em uma experiência visual direta, ajudando novos clientes a conhecerem a produtora e iniciarem uma conversa.", stat: "Direção visual", statLabel: "presença digital personalizada", url: "https://rafaelpequino.github.io/sneets-audiovisual/", tone: "graphite", screenshot: "/project-sneets.png" },
-  { index: "03", client: "LUCIANA SZAROTA", title: "Uma presença digital para transformar planos em oportunidades", text: "A consultora precisava apresentar seu atendimento de forma clara, profissional e próxima. A página organiza as possibilidades de consórcio, responde às principais dúvidas e conduz o visitante para uma conversa direta.", stat: "Atendimento direto", statLabel: "experiência comercial personalizada", url: "", tone: "sand", screenshot: "/showcase-consultora.png" },
+  { client: "One Odontologia", category: "Site institucional", description: "Uma presença digital elegante e objetiva para apresentar a clínica, seus tratamentos e facilitar o contato de novos pacientes.", image: "/project-one-odontologia.png", url: "https://invisalignemmoema.com.br/", tone: "blue" },
+  { client: "Sneets Audiovisual", category: "Portfólio criativo", description: "Uma vitrine visual com personalidade para reunir serviços, produções e a identidade marcante da produtora audiovisual.", image: "/project-sneets.png", url: "https://rafaelpequino.github.io/sneets-audiovisual/", tone: "dark" },
+  { client: "Luciana Szarota", category: "Landing page comercial", description: "Uma página clara e próxima para apresentar soluções de consórcio e conduzir o visitante até uma conversa comercial.", image: "/showcase-consultora.png", url: "", tone: "sand" },
 ];
-
 const testimonials = [
-  { text: "Além de desenvolver o site, o Rafael ajudou a organizar a ideia e sugeriu caminhos que fizeram sentido para o negócio. Foi um trabalho muito tranquilo do início ao fim.", name: "Henriques", role: "Auto Confiança", photo: "/testimonial-henriques.png", url: "https://autoconfianca.com.br/" },
-  { text: "O Rafael entendeu rapidamente o que precisávamos e conduziu todo o projeto com muita clareza. O resultado ficou profissional, organizado e fácil para nossos clientes utilizarem.", name: "Larissa", role: "One Odontologia Moema", photo: "/testimonial-larissa.png", url: "https://invisalignemmoema.com.br/" },
-  { text: "Durante todo o processo, a comunicação foi simples e objetiva. Eu sempre soube em qual etapa o projeto estava e o que seria entregue em seguida.", name: "Samuel", role: "Personal Trainer", photo: "/testimonial-samuel.png", url: "https://personalsamuelalves.com.br/" },
+  { text: "O Rafael ajudou a organizar a ideia e sugeriu caminhos que fizeram sentido para o negócio.", name: "Henriques", role: "Auto Confiança", photo: "/testimonial-henriques.png" },
+  { text: "Entendeu rapidamente o que precisávamos. O resultado ficou profissional, organizado e fácil de usar.", name: "Larissa", role: "One Odontologia", photo: "/testimonial-larissa.png" },
+  { text: "A comunicação foi simples e objetiva. Eu sempre soube em qual etapa o projeto estava.", name: "Samuel", role: "Personal Trainer", photo: "/testimonial-samuel.png" },
 ];
-
-const steps = ["Contato", "Briefing", "Orçamento", "Contratação", "Desenvolvimento", "Aprovação", "Publicação", "Suporte"];
-
-const assurances = [
-  ["✓", "Contrato", "Todo projeto é formalizado através de um contrato de prestação de serviços."], ["▤", "Nota fiscal", "Você recebe nota fiscal pelo serviço contratado."], ["◇", "Pagamento facilitado", "PIX ou cartão de crédito, com possibilidade de parcelamento."], ["3", "meses de garantia", "Bugs relacionados ao desenvolvimento são corrigidos sem custo no período."],
-];
-
 const faqs = [
-  ["Quanto custa desenvolver um projeto?", "Cada projeto possui necessidades diferentes. Após entender o que você precisa, preparo um orçamento personalizado com escopo, investimento e prazo."],
-  ["Preciso entender de tecnologia?", "Não. Você me explica o que precisa e eu cuido da parte técnica, mantendo uma comunicação simples durante todo o projeto."],
-  ["Como funciona o pagamento?", "O projeto é iniciado com 50% do investimento. Os outros 50% são pagos na conclusão. O pagamento pode ser realizado via PIX ou cartão de crédito."],
-  ["O projeto possui garantia?", "Sim. Todos os projetos contam com 3 meses de garantia para correção de eventuais bugs relacionados ao desenvolvimento."],
-  ["Você atende somente São Paulo?", "Não. Todo o processo pode ser realizado remotamente, permitindo atender clientes de qualquer lugar."],
+  ["Quanto custa um projeto?", "O investimento depende do escopo. Depois de entender sua necessidade, envio uma proposta clara com prazo e valor."],
+  ["Preciso entender de tecnologia?", "Não. Você explica o objetivo e eu cuido das decisões técnicas, sempre em linguagem simples."],
+  ["Como funciona o pagamento?", "50% no início e 50% na conclusão, via PIX ou cartão de crédito."],
+  ["O projeto possui garantia?", "Sim. São 3 meses de garantia para correção de bugs relacionados ao desenvolvimento."],
 ];
 
-function WhatsAppLink({ children, className = "button" }: { children: React.ReactNode; className?: string }) {
-  return <a className={className} href={WHATSAPP} target="_blank" rel="noreferrer">{children}</a>;
-}
-
-function SectionTitle({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string }) {
-  return <div className="section-heading reveal">{eyebrow && <p className="eyebrow">{eyebrow}</p>}<h2>{title}</h2>{intro && <p>{intro}</p>}</div>;
-}
+function WhatsAppLink({ children, className = "button" }: { children: React.ReactNode; className?: string }) { return <a className={className} href={WHATSAPP} target="_blank" rel="noreferrer">{children}</a>; }
+function Heading({ label, title, text }: { label: string; title: string; text?: string }) { return <div className="heading reveal"><span>{label}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>; }
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: .12 });
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  useEffect(() => { const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: .12 }); document.querySelectorAll(".reveal").forEach(element => observer.observe(element)); return () => observer.disconnect(); }, []);
+  useEffect(() => { document.body.classList.toggle("menu-open", menuOpen); const onKey = (event: KeyboardEvent) => event.key === "Escape" && setMenuOpen(false); window.addEventListener("keydown", onKey); return () => { document.body.classList.remove("menu-open"); window.removeEventListener("keydown", onKey); }; }, [menuOpen]);
   const closeMenu = () => setMenuOpen(false);
-
+  const links = [["Início", "inicio"], ["Sobre", "sobre"], ["Serviços", "servicos"], ["Projetos", "projetos"], ["Depoimentos", "depoimentos"], ["Contato", "contato"]];
   return <>
-    <header className="site-header">
-      <div className="header-inner">
-        <a className="brand" href="#inicio" onClick={closeMenu}>Rafael Pequino</a>
-        <nav className={menuOpen ? "nav open" : "nav"} aria-label="Navegação principal">
-          {[['Início','inicio'],['Serviços','servicos'],['Portfólio','projetos'],['Como Funciona','processo'],['Depoimentos','depoimentos'],['Contato','contato']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={closeMenu}>{label}</a>)}
-          <WhatsAppLink className="button mobile-cta">Falar comigo</WhatsAppLink>
-        </nav>
-        <WhatsAppLink className="button header-cta">Falar comigo <span>↗</span></WhatsAppLink>
-        <button className={menuOpen ? "menu-button active" : "menu-button"} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Abrir menu"><span></span><span></span></button>
-      </div>
-    </header>
-
+    <header className="site-header"><div className="header-inner"><a className="brand" href="#inicio" onClick={closeMenu}>Rafael Pequino<span>.</span></a><nav className={menuOpen ? "nav open" : "nav"} aria-label="Navegação principal"><div className="nav-head"><strong>Menu</strong><button className="nav-close" onClick={closeMenu} aria-label="Fechar menu"><i></i><i></i></button></div>{links.map(([label, id]) => <a key={id} href={`#${id}`} onClick={closeMenu}>{label}</a>)}<WhatsAppLink className="button nav-cta">Falar sobre meu projeto <span>↗</span></WhatsAppLink></nav><button className={menuOpen ? "backdrop open" : "backdrop"} onClick={closeMenu} aria-label="Fechar menu" tabIndex={menuOpen ? 0 : -1}></button><WhatsAppLink className="button header-cta">Vamos conversar <span>↗</span></WhatsAppLink><button className="menu-button" onClick={() => setMenuOpen(true)} aria-expanded={menuOpen} aria-label="Abrir menu"><i></i><i></i></button></div></header>
     <main>
-      <section className="hero" id="inicio">
-        <div className="hero-copy reveal visible">
-          <p className="eyebrow">DESENVOLVIMENTO SOB MEDIDA</p>
-          <h1>Sua ideia. <span>Uma solução feita para ela.</span></h1>
-          <p className="lead">Transformo necessidades em sites, sistemas e automações desenvolvidos de forma personalizada para cada projeto.</p>
-          <div className="hero-actions"><WhatsAppLink>Quero falar sobre meu projeto <span>↗</span></WhatsAppLink><a className="text-link" href="#projetos">Ver projetos <span>↓</span></a></div>
-          <div className="trust-row"><span>✓ Atendimento 100% remoto</span><span>✓ Orçamento personalizado</span><span>✓ Contrato e nota fiscal</span></div>
-        </div>
-        <div className="portrait-wrap reveal visible"><div className="portrait-accent" aria-hidden="true"></div><Image className="portrait" src="/rafael.png" alt="Rafael Pequino, desenvolvedor de soluções digitais" width={720} height={720} priority sizes="(max-width: 820px) 90vw, 42vw" /><div className="experience-card"><strong>+4 anos</strong><span>transformando ideias<br/>em soluções digitais</span></div></div>
-      </section>
-
-      <section className="numbers" aria-label="Credibilidade"><div><strong>+4 anos</strong><span>de experiência</span></div><div><strong>100% remoto</strong><span>atendimento onde você estiver</span></div><div><strong>Acompanhamento</strong><span>do início ao fim</span></div><div><strong>3 meses</strong><span>de garantia</span></div></section>
-
-      <section className="section services" id="servicos"><div className="container"><SectionTitle eyebrow="O QUE POSSO DESENVOLVER" title="Soluções para o que seu negócio precisa." intro="Cada projeto começa por uma necessidade diferente. Meu trabalho é entender o que você precisa e transformar isso em uma solução funcional, profissional e preparada para o seu negócio."/><div className="card-grid">{services.map((service) => <article className="service-card reveal" key={service.title}><span className="service-icon">{service.icon}</span><p className="card-label">{service.title}</p><h3>{service.headline}</h3><WhatsAppLink className="card-link">Conversar sobre esta solução <span>↗</span></WhatsAppLink></article>)}</div></div></section>
-
-      <section className="visual-showcase" aria-label="Prévia de projetos desenvolvidos"><div className="container visual-showcase-grid"><div className="visual-showcase-copy reveal"><p className="eyebrow light">PROJETOS COM IDENTIDADE</p><h2>Cada negócio pede uma presença diferente.</h2><p>Do visual mais elegante ao mais energético, cada interface é desenhada para comunicar a personalidade do projeto e conduzir o visitante à ação.</p><a className="showcase-link" href="#projetos">Explorar o portfólio <span>↓</span></a></div><div className="site-stack reveal"><div className="site-frame site-frame-one" aria-hidden="true"><div className="frame-top"><i></i><i></i><i></i></div><Image src="/showcase-imovel.png" alt="" width={1419} height={904} loading="lazy"/></div><div className="site-frame site-frame-two" aria-hidden="true"><div className="frame-top"><i></i><i></i><i></i></div><Image src="/project-samuel-alves.png" alt="" width={1334} height={884} loading="lazy"/></div><div className="site-frame site-frame-three" aria-hidden="true"><div className="frame-top"><i></i><i></i><i></i></div><Image src="/showcase-investimento.png" alt="" width={1504} height={902} loading="lazy"/></div><a className="stack-badge" href="#projetos">3 projetos reais <b>↗</b></a></div></div></section>
-
-      <section className="section difference"><div className="container split"><div className="difference-copy reveal"><p className="eyebrow light">MEU JEITO DE TRABALHAR</p><h2>Mais do que desenvolver um produto, eu desenvolvo uma solução.</h2><p className="big-copy">Um bom projeto não começa escolhendo uma tecnologia. Começa entendendo um problema.</p></div><div className="benefit-list reveal">{[["01","Atendimento direto"],["02","Desenvolvimento personalizado"],["03","Acompanhamento completo"]].map(x=><div className="benefit" key={x[0]}><span>{x[0]}</span><div><h3>{x[1]}</h3></div></div>)}</div></div></section>
-
-      <section className="section projects" id="projetos"><div className="container"><SectionTitle eyebrow="TRABALHOS SELECIONADOS" title="Projetos que saíram do papel." intro="Conheça algumas soluções que já desenvolvi para profissionais e empresas."/><div className="project-list">{projects.map((project, i) => <article className={`project-card reveal ${i % 2 ? 'reverse' : ''}`} key={project.client}><div className={`project-visual ${project.tone}`}><div className="browser-bar"><span></span><span></span><span></span></div><img className="project-screenshot" src={project.screenshot} alt={`Tela principal do projeto ${project.client}`} loading="lazy"/><span className="project-number">{project.index}</span></div><div className="project-copy"><p className="eyebrow">{project.client}</p><h3>{project.title}</h3><p>{project.text}</p><div className="project-bottom"><div className="project-stat"><strong>{project.stat}</strong><span>{project.statLabel}</span></div>{project.url ? <a className="outline-button" href={project.url} target="_blank" rel="noreferrer">Ver projeto <span>↗</span></a> : <span className="outline-button project-pending">Link em breve</span>}</div></div></article>)}</div></div></section>
-
-      <section className="objection"><div className="container reveal"><p className="eyebrow">SEM COMPLICAÇÃO</p><h2>Você não precisa entender de tecnologia.</h2><p>Você me explica sua ideia, seu problema ou o que gostaria de melhorar. <strong>A parte técnica fica comigo.</strong></p></div></section>
-
-      <section className="section process" id="processo"><div className="container"><SectionTitle eyebrow="PROCESSO TRANSPARENTE" title="Da ideia à publicação." intro="Um caminho claro, com você acompanhando cada etapa."/><div className="timeline">{steps.map((step,i)=><article className="step reveal" key={step}><span className="step-number">{String(i+1).padStart(2,'0')}</span><div><p className="card-label">{step}</p></div></article>)}</div></div></section>
-
-      <section className="section safety"><div className="container"><SectionTitle eyebrow="SEGURANÇA NA CONTRATAÇÃO" title="Simples, seguro e sem surpresas."/><div className="assurance-grid">{assurances.map((item)=><article className="assurance reveal" key={item[1]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div></div></section>
-
-      <section className="section maintenance"><div className="container maintenance-box reveal"><div><p className="eyebrow light">DEPOIS DA ENTREGA</p><h2>Seu projeto não termina na publicação.</h2></div><div><p>Após a entrega, você pode continuar contando comigo para manter seu projeto funcionando corretamente.</p><WhatsAppLink className="button button-light">Inicie seu projeto <span>↗</span></WhatsAppLink></div></div></section>
-
-      <section className="section about" id="sobre"><div className="container about-grid"><div className="about-photo reveal"><Image src="/rafael.png" alt="Foto profissional de Rafael Pequino" width={720} height={720} loading="lazy" sizes="(max-width: 820px) 90vw, 42vw"/><div><strong>Experiência prática</strong><span>em projetos e ambientes corporativos</span></div></div><div className="about-copy reveal"><p className="eyebrow">QUEM ESTÁ POR TRÁS DOS PROJETOS?</p><h2>Rafael Pequino</h2><p>Sou desenvolvedor de software com mais de 4 anos de experiência, atuando no desenvolvimento de soluções digitais para empresas e profissionais.</p><p>Minha trajetória combina experiência como freelancer com atuação em ambientes corporativos, tendo passado pelo CRECISP e pela Sabesp.</p><p>Sou Técnico em Desenvolvimento de Sistemas e estudante de Engenharia da Computação, unindo formação técnica à experiência prática no desenvolvimento de projetos.</p><WhatsAppLink className="text-button">Falar com Rafael <span>↗</span></WhatsAppLink></div></div></section>
-
-      <section className="technology"><div className="container technology-inner reveal"><div><p className="eyebrow">TECNOLOGIA COMO MEIO, NÃO COMO FIM</p><h2>Tecnologia certa para cada projeto.</h2><p>Cada projeto possui necessidades diferentes. Por isso, trabalho com diferentes ferramentas e tecnologias, escolhendo aquilo que faz mais sentido para cada solução.</p></div><div className="tech-list">{['JavaScript','TypeScript','Python','C#','Java','SQL','React','Angular','Vue','Node.js','ASP.NET','MongoDB','Docker','AWS','Power BI','n8n'].map(t=><span key={t}>{t}</span>)}</div></div></section>
-
-      <section className="section testimonials" id="depoimentos"><div className="container"><SectionTitle eyebrow="DEPOIMENTOS" title="O que meus clientes dizem."/><div className="testimonial-grid">{testimonials.map((testimonial)=><article className="testimonial-card reveal" key={testimonial.role}><div className="stars" aria-label="5 estrelas">★★★★★</div><p>{testimonial.text}</p><div className="client-placeholder"><Image src={testimonial.photo} alt={`Foto de ${testimonial.name}`} width={48} height={48} loading="lazy"/><div><strong>{testimonial.name}</strong><small>{testimonial.role}</small><a href={testimonial.url} target="_blank" rel="noreferrer">Ver projeto <span>↗</span></a></div></div></article>)}</div></div></section>
-
-      <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow">DÚVIDAS COMUNS</p><h2>Perguntas frequentes</h2><p>Não encontrou o que procurava? Fale comigo diretamente pelo WhatsApp.</p><WhatsAppLink className="text-button">Tirar uma dúvida <span>↗</span></WhatsAppLink></div><div className="faq-list">{faqs.map((faq,i)=><div className="faq-item" key={faq[0]}><button aria-expanded={openFaq===i} onClick={()=>setOpenFaq(openFaq===i?null:i)}><span>{faq[0]}</span><i>{openFaq===i?'−':'+'}</i></button><div className={openFaq===i?'faq-answer open':'faq-answer'}><p>{faq[1]}</p></div></div>)}</div></div></section>
-
-      <section className="final-cta" id="contato"><div className="container reveal"><p className="eyebrow light">VAMOS CONVERSAR?</p><h2>Tem uma ideia? Vamos transformá-la em uma solução.</h2><p>Me conte brevemente o que você precisa. Vou entender seu projeto e te orientar sobre o melhor caminho para tirá-lo do papel.</p><WhatsAppLink className="button button-white">Fale comigo pelo WhatsApp <span>↗</span></WhatsAppLink><small>Atendimento 100% remoto <b>•</b> Orçamento sem compromisso</small></div></section>
+      <section className="hero" id="inicio"><div className="hero-copy reveal visible"><span className="eyebrow"><i></i> Desenvolvimento sob medida</span><h1>Seu negócio <em>merece mais</em> do que só um site bonito</h1><p>Tecnologia para sua empresa vender mais, trabalhar melhor e crescer.</p><div className="hero-actions"><WhatsAppLink>Quero falar sobre meu projeto <span>↗</span></WhatsAppLink><a href="#projetos" className="quiet-link">Ver projetos <span>↓</span></a></div><div className="proof"><div><strong>+5</strong><span>anos de experiência</span></div><div><strong>100%</strong><span>online</span></div><div><strong>3 meses</strong><span>de garantia</span></div></div></div><div className="hero-visual reveal visible"><div className="portrait-shape"></div><div className="portrait-grid"></div><img src="/rafael-hero.png" alt="Rafael Pequino, desenvolvedor de software" width="1154" height="1363" /><div className="status-card"><i></i><div><strong>Disponível para projetos</strong><span>Atendimento em todo o Brasil</span></div></div><span className="visual-code">RP — 2026</span></div></section>
+      <section className="about section" id="sobre"><div className="container about-grid"><div className="about-title reveal"><p className="eyebrow">Quem sou eu</p><h2>Tecnologia sem complicação. Soluções que fazem sentido.</h2></div><div className="about-copy reveal"><p className="lead-copy">Olá, muito prazer! 👋<br/>Sou o Rafael. Há mais de 4 anos transformo ideias, processos e necessidades de negócio em soluções digitais.</p><div className="credentials"><span>Estratégia</span><span>Tecnologia</span><span>Resultado</span></div></div></div></section>
+      <section className="identity section"><div className="container identity-grid"><div className="identity-copy reveal"><span className="eyebrow light">Projetos com identidade</span><h2>Seu negócio é único. Sua presença digital também deveria ser.</h2><p>Visual, conteúdo e tecnologia trabalhando juntos para comunicar seu valor e transformar visitantes em oportunidades.</p><div className="principles">{[["01", "Atendimento direto"], ["02", "Desenvolvimento personalizado"], ["03", "Acompanhamento completo"]].map(item => <div key={item[0]}><span>{item[0]}</span><strong>{item[1]}</strong></div>)}</div></div><div className="browser-stack reveal" aria-label="Exemplos de projetos"><div className="mini-browser back"><span></span><img src="/showcase-imovel.png" alt="Projeto imobiliário" /></div><div className="mini-browser middle"><span></span><img src="/showcase-investimento.png" alt="Projeto de investimentos" /></div><div className="mini-browser front"><span></span><img src="/project-samuel-alves.png" alt="Projeto de personal trainer" /></div></div></div></section>
+      <section className="services section" id="servicos"><div className="container"><Heading label="O que posso desenvolver" title="O que seu negócio precisa, desenvolvido do jeito certo." /><div className="service-grid">{services.map(service => <a className="service-card reveal" key={service[0]} href={WHATSAPP} target="_blank" rel="noreferrer" aria-label={`Conversar sobre ${service[1]}`}><span>{service[0]}</span><div><h3>{service[1]}</h3><p>{service[2]}</p></div><b>↗</b></a>)}</div></div></section>
+      <section className="work section" id="projetos"><div className="container"><Heading label="Trabalhos selecionados" title="Soluções reais que saíram do papel." /><div className="work-grid">{projects.map((project, index) => <article className={`work-card ${project.tone} ${index % 2 ? "reverse" : ""} reveal`} key={project.client}><div className="work-image"><div className="browser-top"><i></i><i></i><i></i></div><img src={project.image} alt={`Projeto ${project.client}`} loading="lazy" /></div><div className="work-meta"><span>0{index + 1} / {project.category}</span><h3>{project.client}</h3><p>{project.description}</p>{project.url ? <a className="project-link" href={project.url} target="_blank" rel="noreferrer">Ver projeto <b>↗</b></a> : <span className="project-pending">Link em breve</span>}</div></article>)}</div></div></section>
+      <section className="testimonials section" id="depoimentos"><div className="container"><Heading label="Depoimentos" title="Feedbacks de quem já trabalhou comigo" /><div className="testimonial-grid">{testimonials.map(item => <article className="quote reveal" key={item.name}><span>“</span><p>{item.text}</p><div><img src={item.photo} alt={item.name} /><div><strong>{item.name}</strong><small>{item.role}</small></div></div></article>)}</div></div></section>
+      <section className="faq section"><div className="container faq-grid"><div className="faq-intro reveal"><Heading label="Dúvidas frequentes" title="Alguma dúvida antes de começar?" /><WhatsAppLink className="quiet-link">Ainda tem uma dúvida? Fale comigo ↗</WhatsAppLink></div><div className="faq-list">{faqs.map((faq, index) => <div className="faq-item" key={faq[0]}><button onClick={() => setOpenFaq(openFaq === index ? null : index)} aria-expanded={openFaq === index}><span>{faq[0]}</span><i>{openFaq === index ? "−" : "+"}</i></button><div className={openFaq === index ? "answer open" : "answer"}><p>{faq[1]}</p></div></div>)}</div></div></section>
+      <section className="contact" id="contato"><div className="container reveal"><span className="eyebrow light">Vamos conversar?</span><h2>Tem um projeto em mente?<br/><em>Vamos conversar.</em></h2><p>Não precisa ter tudo definido. Me conte o que você precisa e eu te ajudo a encontrar o melhor caminho.</p><WhatsAppLink className="button light-button">Fale comigo <span>↗</span></WhatsAppLink></div></section>
     </main>
-
-    <footer><div className="container footer-grid"><div><a className="brand footer-brand" href="#inicio">Rafael Pequino</a><p>Desenvolvimento de soluções digitais.</p></div><div><strong>Soluções</strong><a href="#servicos">Sites</a><a href="#servicos">Landing Pages</a><a href="#servicos">Sistemas</a><a href="#servicos">Automações</a></div><div><strong>Navegação</strong><a href="#projetos">Projetos</a><a href="#processo">Como funciona</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></div><div><strong>Contato</strong><a href={WHATSAPP} target="_blank" rel="noreferrer">+55 11 97566-9706 ↗</a><span>Atendimento 100% remoto</span></div></div><div className="container copyright"><span>© 2026 Rafael Pequino. Todos os direitos reservados.</span><a href="#inicio">Voltar ao topo ↑</a></div></footer>
-
-    <WhatsAppLink className="floating-whatsapp"><Image className="wa-icon" src="/whatsapp-icon.svg" alt="" width={22} height={22}/><span className="wa-label">Falar no WhatsApp</span></WhatsAppLink>
+    <footer className="simple-footer"><div className="container"><a className="footer-name" href="#inicio">Rafael Pequino</a><i></i><span>Soluções Digitais sob encomenda</span><i></i><a className="footer-link" href={WHATSAPP} target="_blank" rel="noreferrer">Fale comigo <b>↗</b></a></div></footer><WhatsAppLink className="floating-wa"><img src="/whatsapp-icon.svg" alt="" /> <span>Vamos conversar</span></WhatsAppLink>
   </>;
 }
