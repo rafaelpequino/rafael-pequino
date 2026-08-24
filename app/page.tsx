@@ -25,7 +25,7 @@ const projects = [
     description:
       "Uma presença digital elegante e objetiva para apresentar a clínica, seus tratamentos e facilitar o contato de novos pacientes.",
     image: "/project-one-odontologia.png",
-    url: "https://invisalignemmoema.com.br/",
+    url: "https://rafaelpequino.github.io/one-odontologia-moema/",
     tone: "blue",
   },
   {
@@ -43,25 +43,25 @@ const projects = [
     description:
       "Uma página clara e próxima para apresentar soluções de consórcio e conduzir o visitante até uma conversa comercial.",
     image: "/showcase-consultora.png",
-    url: "",
+    url: "https://rafaelpequino.github.io/luciana-szarota/",
     tone: "sand",
   },
 ];
 const testimonials = [
   {
-    text: "O Rafael ajudou a organizar a ideia e sugeriu caminhos que fizeram sentido para o negócio.",
+    text: "O Rafael não apenas a página que ele criou, mas foi sempre muito paciente e atencioso.",
     name: "Henriques",
     role: "Auto Confiança",
     photo: "/testimonial-henriques.png",
   },
   {
-    text: "Entendeu rapidamente o que precisávamos. O resultado ficou profissional, organizado e fácil de usar.",
+    text: "Todo o processo foi muito simples. O resultado ficou excelente e muito organizado.",
     name: "Larissa",
     role: "One Odontologia",
     photo: "/testimonial-larissa.png",
   },
   {
-    text: "A comunicação foi simples e objetiva. Eu sempre soube em qual etapa o projeto estava.",
+    text: "A comunicação sempre foi simples e objetiva. Gostei muito do resultado e indico!.",
     name: "Samuel",
     role: "Personal Trainer",
     photo: "/testimonial-samuel.png",
