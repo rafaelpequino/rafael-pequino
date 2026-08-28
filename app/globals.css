@@ -443,8 +443,11 @@ button {
   display: block;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center top;
+  background: #f5f5f3;
 }
 .mini-browser.back {
   width: 61%;
@@ -563,8 +566,11 @@ button {
   width: 100%;
   display: block;
   aspect-ratio: 1.58;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center top;
+  background: #f7f4ef;
 }
 .work-meta {
   position: relative;
@@ -1131,13 +1137,14 @@ footer .container > div span {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  object-position: top;
+  min-width: 100%;
+  object-fit: contain;
+  object-position: center top;
+  background: #f5f5f3;
 }
 .mini-browser.back {
   width: 60%;
-  left: -1%;
+  left: 3%;
   top: 110px;
 }
 .mini-browser.middle {
@@ -1176,8 +1183,11 @@ footer .container > div span {
 }
 .work-image img {
   aspect-ratio: 16/9;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center top;
+  background: #f7f4ef;
 }
 .work-meta {
   display: flex;
@@ -1616,20 +1626,37 @@ footer .footer-bottom a {
     inset: 11% 7% 0 11%;
   }
 }
+@media (min-width: 901px) and (max-width: 1100px) {
+  .hero-copy {
+    padding-top: 0;
+  }
+  .hero-visual {
+    height: 470px;
+  }
+  .hero-visual > img {
+    bottom: 10px;
+    width: 88%;
+    right: 6%;
+    max-height: 460px;
+  }
+  .portrait-shape,
+  .portrait-grid {
+    inset: 9% 8% 10px 10%;
+  }
+}
 
 /* Compact hero and minimal footer */
 @media (min-width: 901px) {
   .hero {
     min-height: 620px;
     padding: 48px 0 30px;
-    align-items: start;
+    align-items: center;
   }
   .hero-copy {
     padding-top: 34px;
   }
   .hero-visual {
-    align-self: start;
-    transform: translateY(-20px);
+    align-self: center;
   }
 }
 footer.simple-footer {
@@ -1714,5 +1741,16 @@ footer.simple-footer .footer-link b {
   }
   footer.simple-footer .container > i {
     display: none;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 761px) {
+  .work-image img {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: auto;
+    object-fit: fill;
   }
 }

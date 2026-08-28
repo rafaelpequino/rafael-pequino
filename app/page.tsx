@@ -7,15 +7,23 @@ const WHATSAPP = `https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`;
 const services = [
   [
     "01",
-    "Sites institucionais",
-    "Uma presença digital à altura da sua empresa.",
+    "Presença digital",
+    "Sites Institucionais e Landing Pages",
   ],
-  ["02", "Landing pages", "Páginas criadas para transformar visitas em leads."],
-  ["03", "Sistemas", "Sistemas desenvolvidos em torno do seu processo."],
+  [
+    "02",
+    "Atendimento & Vendas",
+    "Bots para WhatsApp e Integração com IA",
+  ],
+  [
+    "03",
+    "Sistemas & Automação",
+    "Automatização de processos e Sistemas sob medida.",
+  ],
   [
     "04",
-    "Automações",
-    "Menos trabalho repetitivo. Mais tempo para o que importa.",
+    "Consultoria tecnológica",
+    "Avaliação estratégica de melhorias tecnológicas.",
   ],
 ];
 const projects = [
@@ -49,22 +57,22 @@ const projects = [
 ];
 const testimonials = [
   {
-    text: "O Rafael não apenas a página que ele criou, mas foi sempre muito paciente e atencioso.",
+    text: "Contratei o Rafael Pequino para a criação e implantação do meu site e o resultado foi enorme. Ele entendeu perfeitamente minha atividade e meus objetivos.Recomendo fortemente suas habilidades.",
     name: "Henriques",
     role: "Auto Confiança",
     photo: "/testimonial-henriques.png",
   },
   {
-    text: "Todo o processo foi muito simples. O resultado ficou excelente e muito organizado.",
+    text: "Todo o processo foi muito simples. Eu precisava de um site para a minha clínica, e apenas expliquei como queria e o Rafael desenvolveu exatamente como eu imaginava.",
     name: "Larissa",
     role: "One Odontologia",
     photo: "/testimonial-larissa.png",
   },
   {
-    text: "A comunicação sempre foi simples e objetiva. Gostei muito do resultado e indico!.",
-    name: "Samuel",
-    role: "Personal Trainer",
-    photo: "/testimonial-samuel.png",
+    text: "O Rafael me ajudou a melhorar minha apresentação online, e o resultado foi muito bom. Vários leads chegam pelo site que ele criou. Recomendo!",
+    name: "Luciana",
+    role: "Consultora de consórcios",
+    photo: "/testimonial-luciana.png",
   },
 ];
 const faqs = [
@@ -77,12 +85,12 @@ const faqs = [
     "Não. Você explica o objetivo e eu cuido das decisões técnicas, sempre em linguagem simples.",
   ],
   [
-    "Como funciona o pagamento?",
-    "50% no início e 50% na conclusão, via PIX ou cartão de crédito.",
+    "Quais formas de pagamento são aceitas?",
+    "Pix, Boleto Bancário ou Cartão de Crédito (à vista ou parcelado).",
   ],
   [
     "O projeto possui garantia?",
-    "Sim. São 3 meses de garantia para correção de bugs relacionados ao desenvolvimento.",
+    "Sim. São 6 meses de garantia para correção de bugs relacionados ao desenvolvimento.",
   ],
 ];
 
@@ -235,7 +243,7 @@ export default function Home() {
                 <span>online</span>
               </div>
               <div>
-                <strong>3 meses</strong>
+                <strong>6 meses</strong>
                 <span>de garantia</span>
               </div>
             </div>
@@ -245,7 +253,7 @@ export default function Home() {
             <div className="portrait-grid"></div>
             <img
               src="/rafael-hero.png"
-              alt="Rafael Pequino, desenvolvedor de software"
+              alt="Rafael Pequino, analista de sistemas"
               width="1154"
               height="1363"
             />
